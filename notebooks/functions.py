@@ -19,7 +19,6 @@ def save_to_csv(df: pd.DataFrame, csv_name: str):
     print(f"DataFrame successfully saved to {full_path}")
 
 
-
 def two_proportion_test(x1, n1, x2, n2, alpha=0.10):
     """
     Perform two-proportion z-test
@@ -62,3 +61,12 @@ def two_proportion_test(x1, n1, x2, n2, alpha=0.10):
         'significant': p_value < alpha,
         'assumptions_met': assumptions_met
     }
+
+def backward_steps_for_client(steps , client, variation)->dict:
+    count_backward=0
+    for i in range (1, len(steps)):
+         if (steps[i-1] - steps[i] != 1):
+             count_backward=count_backward+1
+    total_steps=len(steps)-1
+    return {client:count_backward/total_steps if total_steps > 0 else 0}
+
